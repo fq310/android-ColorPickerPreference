@@ -44,7 +44,6 @@ public class ColorPickerDialog
 
 	private ColorPickerView mColorPicker;
 
-	private ColorPickerPanelView mOldColor;
 	private ColorPickerPanelView mNewColor;
 	
 	private EditText mHexVal;
@@ -82,7 +81,6 @@ public class ColorPickerDialog
 		setTitle(R.string.dialog_color_picker);
 		
 		mColorPicker = (ColorPickerView) layout.findViewById(R.id.color_picker_view);
-		mOldColor = (ColorPickerPanelView) layout.findViewById(R.id.old_color_panel);
 		mNewColor = (ColorPickerPanelView) layout.findViewById(R.id.new_color_panel);
 		
 		mHexVal = (EditText) layout.findViewById(R.id.hex_val);
@@ -114,35 +112,16 @@ public class ColorPickerDialog
 			}
 		});
 		
-		((LinearLayout) mOldColor.getParent()).setPadding(
-			Math.round(mColorPicker.getDrawingOffset()), 
-			0, 
-			Math.round(mColorPicker.getDrawingOffset()), 
-			0
-		);	
-		
-		mOldColor.setOnClickListener(this);
 		mNewColor.setOnClickListener(this);
 		mColorPicker.setOnColorChangedListener(this);
-		mOldColor.setColor(color);
 		mColorPicker.setColor(color, true);
-
 	}
 
 	@Override
 	public void onColorChanged(int color) {
-
 		mNewColor.setColor(color);
-		
 		if (mHexValueEnabled)
 			updateHexValue(color);
-
-		/*
-		if (mListener != null) {
-			mListener.onColorChanged(color);
-		}
-		*/
-
 	}
 	
 	public void setHexValueEnabled(boolean enable) {
@@ -214,7 +193,6 @@ public class ColorPickerDialog
 	@Override
 	public Bundle onSaveInstanceState() {
 		Bundle state = super.onSaveInstanceState();
-		state.putInt("old_color", mOldColor.getColor());
 		state.putInt("new_color", mNewColor.getColor());
 		return state;
 	}
@@ -222,7 +200,6 @@ public class ColorPickerDialog
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
-		mOldColor.setColor(savedInstanceState.getInt("old_color"));
 		mColorPicker.setColor(savedInstanceState.getInt("new_color"), true);
 	}
 }

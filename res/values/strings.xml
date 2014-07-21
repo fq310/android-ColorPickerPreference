@@ -2,11 +2,11 @@
 <resources>
 	<!-- App -->
     <string name="hello">Hello World, Main!</string>
-    <string name="app_name">ColorPickerPreference</string>
+    <string name="app_name">颜色选择器</string>
     
     <!-- Color Picker -->
-    <string name="dialog_color_picker">Color Picker</string>
-    <string name="press_color_to_apply">Press on Color to apply</string>    
+    <string name="dialog_color_picker">颜色选择器</string>
+    <string name="press_color_to_apply">最终颜色:</string>    
     
     <!-- Preferences -->
     <string name="pref_category">Category</string>
@@ -18,4 +18,11 @@
     <string name="color3_summary">picker with alpha slider</string>
     <string name="color4_title">Color 4</string>
     <string name="color4_summary">color set with HEX code in xml</string>
+    
+    <string name="hex">HEX</string>
+    <string name="arrowDown">↓</string>
+    <string name="arrowLeft">→</string>
+    
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
 </resources>
