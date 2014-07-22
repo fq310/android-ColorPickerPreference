@@ -5,6 +5,7 @@
     <string name="app_name">颜色选择器</string>
     
     <!-- Color Picker -->
+    <string name="dialog_alpha_set">透明度设置</string>
     <string name="dialog_color_picker">颜色选择器</string>
     <string name="press_color_to_apply">最终颜色:</string>    
     

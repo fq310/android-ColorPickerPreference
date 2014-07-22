@@ -20,6 +20,7 @@ import java.util.Locale;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
@@ -32,7 +33,6 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ColorPickerDialog 
@@ -115,6 +115,22 @@ public class ColorPickerDialog
 		mNewColor.setOnClickListener(this);
 		mColorPicker.setOnColorChangedListener(this);
 		mColorPicker.setColor(color, true);
+		mColorPicker.setAlphaSliderText(R.string.dialog_alpha_set);
+		
+		layout.findViewById(R.id.textView_ok).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				hide();
+				notifyColorChangeListener(v);
+			}
+		});
+		
+		layout.findViewById(R.id.textView_cancel).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				cancel();
+			}
+		});
 	}
 
 	@Override
@@ -182,12 +198,14 @@ public class ColorPickerDialog
 
 	@Override
 	public void onClick(View v) {
-		if (v.getId() == R.id.new_color_panel) {
-			if (mListener != null) {
-				mListener.onColorChanged(mNewColor.getColor());
-			}
-		}
+		notifyColorChangeListener(v);
 		dismiss();
+	}
+
+	private void notifyColorChangeListener(View v) {
+		if (mListener != null) {
+			mListener.onColorChanged(mNewColor.getColor());
+		}
 	}
 	
 	@Override
@@ -202,4 +220,5 @@ public class ColorPickerDialog
 		super.onRestoreInstanceState(savedInstanceState);
 		mColorPicker.setColor(savedInstanceState.getInt("new_color"), true);
 	}
+	
 }
